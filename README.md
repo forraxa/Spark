@@ -1,6 +1,6 @@
 # Dataframe Spark 
 
-## Acción sobre dataframe iris
+## Acciones sobre dataframe iris
 
 **show()** : If you want to see top `20 rows` of DataFrame in a tabular form then use the following command.
 ```scala
