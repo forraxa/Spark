@@ -1,6 +1,6 @@
-# spark
+# Dataframe Spark 
 
-### Acción sobre dataframe iris
+## Acción sobre dataframe iris
 
 **show()** : If you want to see top `20 rows` of DataFrame in a tabular form then use the following command.
 ```scala
@@ -51,7 +51,7 @@ val resultCollect = iris.collect()
 ```
 
 
-### Funciones sobre dataframe iris
+## Funciones sobre dataframe iris
 
 **printSchema()** : If you want to see the Structure (Schema) of the DataFrame, then use the following command.
 ```scala
@@ -83,7 +83,7 @@ val resultCache = iris.filter(iris("sepal") > 30)
     resultCache.cache().show()
 ```
 
-### Operaciones sobre dataframe iris
+## Operaciones sobre dataframe iris
 
 **sort()** : Returns a new DataFrame sorted by the given expressions.
 ```scala
