@@ -33,3 +33,8 @@ val mostCommon = counts.map(p => (p._2, p._1)).sortByKey(false, 1)
 
 mostCommon.take(5)
 ```
+___  
+Otra posibilidad de aplicar un patron
+```
+val changeFlatMap = changeFile.flatMap("[a-z]+".r findAllIn _)
+```
