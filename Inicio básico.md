@@ -1,5 +1,5 @@
-## La caja de herramientas para Spark.
-Conjunto de herramientas basicas para el manejo de Spark.  
+## Código de inicio con SparkSession.
+
 
 ### crear SparkSession
 
