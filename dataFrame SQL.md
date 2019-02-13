@@ -84,6 +84,7 @@ object DataFrame_Tutorial extends App with Context {
     .join(dfTags, Seq("id"), "inner")
     .show(10)
 ```
+```
   //Distinct
   dfTags
     .select("tag")
