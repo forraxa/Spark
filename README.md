@@ -1,8 +1,9 @@
 # Spark
 
-#### SPARK SQL
+#### SPARK SQL 
 [1- DataFrame SQL](https://github.com/forraxa/Spark/blob/master/dataFrame%20SQL.md)  
-[2- Spark SQL](https://github.com/forraxa/Spark/blob/master/spark%20SQL.md)
+[2- Spark SQL](https://github.com/forraxa/Spark/blob/master/spark%20SQL.md)  
+[3- Estadísticas Dataframe](https://github.com/forraxa/Spark/blob/master/Estadisticas%20Dataframe.md)  
 
 #### Comandos básicos de Spark Scala  
 
