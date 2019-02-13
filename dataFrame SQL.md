@@ -15,6 +15,7 @@ object DataFrame_Tutorial extends App with Context {
     .toDF("id", "tag")
 
   dfTags.show(10)
+}
 ```
 ```
   dfTags.select("id", "tag").show(10)
@@ -68,6 +69,7 @@ object DataFrame_Tutorial extends App with Context {
   val dfQuestionsSubset = dfQuestions.filter("score > 400 and score < 410").toDF()
   dfQuestionsSubset.show()
 ```
+```
   //join
   dfQuestionsSubset.join(dfTags, "id").show(10)
 
@@ -87,7 +89,5 @@ object DataFrame_Tutorial extends App with Context {
     .select("tag")
     .distinct()
     .show(10)
+```
 
-}
-```
-```
