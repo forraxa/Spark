@@ -65,7 +65,8 @@ object Estadisticas extends App with Context{
   dfQuestions
     .select(sum("score"))
     .show(10)
-
+```
+```
   //estadística de datos agrupados
   dfQuestions
     .filter("id > 400 and id < 450")
@@ -74,8 +75,7 @@ object Estadisticas extends App with Context{
     .groupBy(dfQuestions.col("owner_userid"))
     .agg(avg("score"), max("answer_count"))
     .show(10)
-```
-```
+
   //describe() para estadísticas básicas
   val dfQuestionsStadistics = dfQuestions.describe()
   dfQuestionsStadistics.show()
@@ -88,7 +88,8 @@ object Estadisticas extends App with Context{
   //covarianza
   val covariance = dfQuestions.stat.cov("score", "answer_count")
   println(s"la correlación entre las columnas score y answer_count es = $covariance")
-
+```
+```
   //frecuencia de términos
   val dfFrequentScore = dfQuestions.stat.freqItems(Seq("answer_count"))
   dfFrequentScore.show()
@@ -103,7 +104,6 @@ object Estadisticas extends App with Context{
 ```
   //hacer selección aleatoria de muestras bajo la premisa de un tanto porciento
   //de las muestras para cada valor determinado.
-
   //selección de las muestras con valor 5, 10 o 20
   val dfQuestionsByAnswerCount = dfQuestions
     .filter("owner_userid > 0")
