@@ -15,9 +15,11 @@ object DataFrame_Tutorial extends App with Context {
     .toDF("id", "tag")
 
   dfTags.show(10)
-
+```
+```
   dfTags.select("id", "tag").show(10)
-
+```
+```
   //filter
   dfTags.filter("tag == 'php'").show(10)
   println(s"El numero de tags php es: ${dfTags.filter("tag == 'php'").count()}")
@@ -27,12 +29,14 @@ object DataFrame_Tutorial extends App with Context {
     .filter("id == 25 or id == 108")
     .show(10)
   dfTags.filter("id in (25, 108)").show(10)
-
+```
+```  
   //groupBy
   dfTags.groupBy("tag").count().show(10)
   dfTags.groupBy("tag").count().filter("count > 5").show(10)
   dfTags.groupBy("tag").count().filter("count > 5").orderBy("count").show(10)
-
+```
+```
   // DataFrame Query: Cast columns to specific data type
   val dfQuestionsCSV = sparkSession
     .read
@@ -43,7 +47,8 @@ object DataFrame_Tutorial extends App with Context {
     .toDF("id", "creation_date", "closed_date", "deletion_date", "score", "owner_userid", "answer_count")
 
   dfQuestionsCSV.printSchema()
-
+```
+```
   //conversión de tipos
   val dfQuestions = dfQuestionsCSV.select(
     dfQuestionsCSV.col("id").cast("integer"),
@@ -57,11 +62,12 @@ object DataFrame_Tutorial extends App with Context {
 
   dfQuestions.printSchema()
   dfQuestions.show(10)
-
+```
+```
   //marco de datos acotado
   val dfQuestionsSubset = dfQuestions.filter("score > 400 and score < 410").toDF()
   dfQuestionsSubset.show()
-
+```
   //join
   dfQuestionsSubset.join(dfTags, "id").show(10)
 
@@ -75,11 +81,13 @@ object DataFrame_Tutorial extends App with Context {
   dfQuestionsSubset
     .join(dfTags, Seq("id"), "inner")
     .show(10)
-
+```
   //Distinct
   dfTags
     .select("tag")
     .distinct()
     .show(10)
+
 }
+```
 ```
