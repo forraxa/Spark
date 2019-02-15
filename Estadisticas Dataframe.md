@@ -3,6 +3,12 @@
 Indice:  
 - [average, máximo, mínimo, mean, sum](#average-máximo-mínimo-mean-sum) 
 - [estadística de datos agrupados describe()](#estadística-de-datos-agrupados-describe)
+- [correlación y covarianza](#correlación-y-covarianza)
+- [frecuencia de términos y tabla de frecuencia o contingencia](#frecuencia-de-términos-y-tabla-de-frecuencia-o-contingencia)
+- [hacer selección aleatoria de muestras](#hacer-selección-aleatoria-de-muestras)
+- [Cuantile aproximado](#Cuantile-aproximado)
+- [filtro bloom](#filtro-bloom)
+- [muestreo con remplazo](#muestreo-con-remplazo)
 
 
 
@@ -88,6 +94,8 @@ object Estadisticas extends App with Context{
   val dfQuestionsStadistics = dfQuestions.describe()
   dfQuestionsStadistics.show()
 ```
+
+### correlación y covarianza
 ```scala
   //correlación
   val correlation = dfQuestions.stat.corr("score", "answer_count")
@@ -97,6 +105,7 @@ object Estadisticas extends App with Context{
   val covariance = dfQuestions.stat.cov("score", "answer_count")
   println(s"la correlación entre las columnas score y answer_count es = $covariance")
 ```
+### frecuencia de términos y tabla de frecuencia o contingencia
 ```scala
   //frecuencia de términos
   val dfFrequentScore = dfQuestions.stat.freqItems(Seq("answer_count"))
@@ -109,9 +118,10 @@ object Estadisticas extends App with Context{
     .crosstab("score", "owner_userid")
   dfScoreUserid.show(10)
 ```
+### hacer selección aleatoria de muestras
 ```scala
-  //hacer selección aleatoria de muestras bajo la premisa de un tanto porciento
-  //de las muestras para cada valor determinado.
+  //hacer selección aleatoria de muestras bajo la premisa de un tanto porciento 
+  //de las muestras para cada valor determinado
   //selección de las muestras con valor 5, 10 o 20
   val dfQuestionsByAnswerCount = dfQuestions
     .filter("owner_userid > 0")
@@ -134,8 +144,8 @@ object Estadisticas extends App with Context{
     .count()
     .show()
 ```
-```scala
-  //Cuantile aproximado
+### Cuantile aproximado
+```scala  
   //en el metodo approxQuantile() el primer parámetro el la columna sobre la
   //que ejecutar las estadísticas, el segundo es la matriz de probabilidades (0=mínimo, 0.5 = mediana y 1 = máximo)
   // y el tercer parametro es el factor de error de precisión.
@@ -150,8 +160,8 @@ object Estadisticas extends App with Context{
     .sql("select min(score), percentile_approx(score, 0.25), max(score) from so_questions")
     .show()
 ```
-```scala
-  //filtro bloom
+### filtro bloom
+```scala  
   //estructura probabilística usada para verificar si un elemento es miembro de un
   // conjunto. Los falsos positivos son posibles pero los falsos negativos no.
   //primer parámetro = columna de datos
@@ -164,8 +174,9 @@ object Estadisticas extends App with Context{
   println(s"bloom filter contains java tag = ${tagsBloomFilter.mightContain("java")}")
   println(s"bloom filter contains some unknown tag = ${tagsBloomFilter.mightContain("unknown tag")}")
 ```
+### muestreo con remplazo
 ```scala
-  //muestreo con remplazo
+  
   //sample(reemplazo, num_filas, semilla)
   val dfTagsSample = dfTags.sample(true, 0.2, 37L)
   println(s"Number of rows in sample dfTagsSample = ${dfTagsSample.count()}")
