@@ -1,6 +1,6 @@
 ## Estadísticas Dataframe
 
-```
+```scala
 package estadisticas_dataframe
 
 object Estadisticas extends App with Context{
@@ -34,7 +34,7 @@ object Estadisticas extends App with Context{
   )
  }
 ```
-```
+```scala
  //average
   //necesario importar functions
   import org.apache.spark.sql.functions._
@@ -66,7 +66,7 @@ object Estadisticas extends App with Context{
     .select(sum("score"))
     .show(10)
 ```
-```
+```scala
   //estadística de datos agrupados
   dfQuestions
     .filter("id > 400 and id < 450")
@@ -80,7 +80,7 @@ object Estadisticas extends App with Context{
   val dfQuestionsStadistics = dfQuestions.describe()
   dfQuestionsStadistics.show()
 ```
-```
+```scala
   //correlación
   val correlation = dfQuestions.stat.corr("score", "answer_count")
   println(s"la correlación entre las columnas score y answer_count es = $correlation")
@@ -89,7 +89,7 @@ object Estadisticas extends App with Context{
   val covariance = dfQuestions.stat.cov("score", "answer_count")
   println(s"la correlación entre las columnas score y answer_count es = $covariance")
 ```
-```
+```scala
   //frecuencia de términos
   val dfFrequentScore = dfQuestions.stat.freqItems(Seq("answer_count"))
   dfFrequentScore.show()
@@ -101,7 +101,7 @@ object Estadisticas extends App with Context{
     .crosstab("score", "owner_userid")
   dfScoreUserid.show(10)
 ```
-```
+```scala
   //hacer selección aleatoria de muestras bajo la premisa de un tanto porciento
   //de las muestras para cada valor determinado.
   //selección de las muestras con valor 5, 10 o 20
@@ -126,7 +126,7 @@ object Estadisticas extends App with Context{
     .count()
     .show()
 ```
-```
+```scala
   //Cuantile aproximado
   //en el metodo approxQuantile() el primer parámetro el la columna sobre la
   //que ejecutar las estadísticas, el segundo es la matriz de probabilidades (0=mínimo, 0.5 = mediana y 1 = máximo)
@@ -142,7 +142,7 @@ object Estadisticas extends App with Context{
     .sql("select min(score), percentile_approx(score, 0.25), max(score) from so_questions")
     .show()
 ```
-```
+```scala
   //filtro bloom
   //estructura probabilística usada para verificar si un elemento es miembro de un
   // conjunto. Los falsos positivos son posibles pero los falsos negativos no.
@@ -156,7 +156,7 @@ object Estadisticas extends App with Context{
   println(s"bloom filter contains java tag = ${tagsBloomFilter.mightContain("java")}")
   println(s"bloom filter contains some unknown tag = ${tagsBloomFilter.mightContain("unknown tag")}")
 ```
-```
+```scala
   //muestreo con remplazo
   //sample(reemplazo, num_filas, semilla)
   val dfTagsSample = dfTags.sample(true, 0.2, 37L)
