@@ -1,5 +1,7 @@
 ## Estadísticas Dataframe
 
+[average, máximo, mínimo, mean, sum](#average,-máximo,-mínimo,-mean,-sum)
+
 ```scala
 package estadisticas_dataframe
 
@@ -34,6 +36,7 @@ object Estadisticas extends App with Context{
   )
  }
 ```
+### average, máximo, mínimo, mean, sum
 ```scala
  //average
   //necesario importar functions
