@@ -1,6 +1,10 @@
 ## Estadísticas Dataframe
 
-[average, máximo, mínimo, mean, sum](#average-máximo-mínimo-mean-sum)
+Indice:  
+- [average, máximo, mínimo, mean, sum](#average-máximo-mínimo-mean-sum) 
+- [estadística de datos agrupados describe()](#estadística-de-datos-agrupados-describe)
+
+
 
 ```scala
 package estadisticas_dataframe
@@ -69,8 +73,9 @@ object Estadisticas extends App with Context{
     .select(sum("score"))
     .show(10)
 ```
+### estadística de datos agrupados describe()
 ```scala
-  //estadística de datos agrupados
+  
   dfQuestions
     .filter("id > 400 and id < 450")
     .filter("owner_userid is not null")
