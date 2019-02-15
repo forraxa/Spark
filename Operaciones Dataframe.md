@@ -92,7 +92,7 @@ object DataFrameOperations extends App with Context{
   val dfMoreTags = seqTags.toDF("id", "tag")
   dfMoreTags.show(15)
 ```
-union dataframe 
+## union dataframe 
 ```scala
   //dataFrame union
   //Para combinar dos dataframe
