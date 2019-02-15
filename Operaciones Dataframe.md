@@ -2,7 +2,7 @@
 
 Indice:  
 - [convertir el dataFrame en un dataset con la case class](#convertir-el-dataFrame-en-un-dataset-con-la-case-class)
-- [convertir filas de dataFrame a case class con map()](#convertir-filas-de-dataFrame-a-case-class-con-map())
+- [convertir filas de dataFrame a case class con map](#convertir-filas-de-dataFrame-a-case-class-con-map)
 - [crear dataFrame desde una colección](#crear-dataFrame-desde-una-colección)
 - [unión dataframe](#unión-dataframe)  
 - [intersección dataframe](#intersección-dataframe)    
@@ -74,7 +74,7 @@ object DataFrameOperations extends App with Context{
     .take(10)
     .foreach(t => println(s"id = ${t.id}, tag = ${t.tag}"))
 ```
-### convertir filas de dataFrame a case class con map()
+### convertir filas de dataFrame a case class con map
 ```scala
   
   //creación de case class Question
