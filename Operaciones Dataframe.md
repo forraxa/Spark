@@ -1,7 +1,34 @@
 ## Operaciones con DataFrame
 
+unión dataframe
+intersección dataframe
+agragar columnas a dataframe
 
+```scala
+package operaciones_dataframe
+
+import org.apache.log4j.{Level, Logger}
+import org.apache.spark.SparkConf
+import org.apache.spark.sql.SparkSession
+
+trait Context {
+
+  // Set the log level to only print errors
+  Logger.getLogger("org").setLevel(Level.ERROR)
+
+  lazy val sparkConf = new SparkConf()
+
+    .setAppName("Learn Spark")
+    .setMaster("local[*]")
+    .set("spark.cores.max", "2")
+
+  lazy val sparkSession = SparkSession
+    .builder()
+    .config(sparkConf)
+    .getOrCreate()
+}
 ```
+```scala
 package operaciones_dataframe
 
 import org.apache.spark.sql.Dataset
@@ -34,7 +61,7 @@ object DataFrameOperations extends App with Context{
   dfQuestions.show(10)
 }
 ```
-```
+```scala
   //convertir el dataFrame en un dataset con la case class Tag creada
   case class Tag(id: Int, tag: String)
   import sparkSession.implicits._
@@ -43,7 +70,7 @@ object DataFrameOperations extends App with Context{
     .take(10)
     .foreach(t => println(s"id = ${t.id}, tag = ${t.tag}"))
 ```
-```
+```scala
   //convertir filas de dataFrame a case class con map()
   //creación de case class Question
   case class Question(owner_userid: Int, tag: String, creationDate: java.sql.Timestamp, score: Int)
@@ -65,7 +92,7 @@ object DataFrameOperations extends App with Context{
   val dfMoreTags = seqTags.toDF("id", "tag")
   dfMoreTags.show(15)
 ```
-```
+```scala
   //dataFrame union
   //Para combinar dos dataframe
   val dfUnionOfTags = dfTags
