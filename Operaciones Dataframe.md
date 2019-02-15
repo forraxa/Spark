@@ -1,8 +1,12 @@
 ## Operaciones con DataFrame
 
-[unión dataframe](#unión-dataframe)  
-[intersección dataframe](#intersección-dataframe)    
-[agregar columnas a dataframe](#agregar-columnas-a-dataframe)    
+Indice:  
+- [convertir el dataFrame en un dataset con la case class](#convertir-el-dataFrame-en-un-dataset-con-la-case-class)
+- [convertir filas de dataFrame a case class con map()](#convertir-filas-de-dataFrame-a-case-class-con-map())
+- [crear dataFrame desde una colección](#crear-dataFrame-desde-una-colección)
+- [unión dataframe](#unión-dataframe)  
+- [intersección dataframe](#intersección-dataframe)    
+- [agregar columnas a dataframe](#agregar-columnas-a-dataframe)    
 
 ```scala
 package operaciones_dataframe
@@ -61,8 +65,8 @@ object DataFrameOperations extends App with Context{
   dfQuestions.show(10)
 }
 ```
+### convertir el dataFrame en un dataset con la case class
 ```scala
-  //convertir el dataFrame en un dataset con la case class Tag creada
   case class Tag(id: Int, tag: String)
   import sparkSession.implicits._
   val dfTagsOfTag: Dataset[Tag] = dfTags.as[Tag]
@@ -70,8 +74,9 @@ object DataFrameOperations extends App with Context{
     .take(10)
     .foreach(t => println(s"id = ${t.id}, tag = ${t.tag}"))
 ```
+### convertir filas de dataFrame a case class con map()
 ```scala
-  //convertir filas de dataFrame a case class con map()
+  
   //creación de case class Question
   case class Question(owner_userid: Int, tag: String, creationDate: java.sql.Timestamp, score: Int)
 
@@ -80,8 +85,9 @@ object DataFrameOperations extends App with Context{
   val donutTasteLevel: String = "Tasty"
   println(f"$donutName%20s $donutTasteLevel")
 ```
+### crear dataFrame desde una colección
 ```scala
-  //crear dataFrame desde una colección
+  
   val seqTags = Seq(
     1 -> "so_java",
     1 -> "so_jsp",
@@ -106,7 +112,7 @@ object DataFrameOperations extends App with Context{
     .intersect(dfUnionOfTags)
     .show(10)
 ```
-### agregar columnas a un dataFrame
+### agregar columnas a dataframe
 ```scala
   //
   import org.apache.spark.sql.functions._
