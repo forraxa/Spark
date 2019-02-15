@@ -3,9 +3,9 @@
 Indice:  
 - [filter](#filter)  
 - [groupBy](#groupBy)  
-- [conversión de tipos](#conversión de tipos)  
-- [marco de datos acotado](#marco de datos acotado)  
-- [join, inner join ](#join, inner join )  
+- [conversión de tipos](#conversión-de-tipos)  
+- [marco de datos acotado](#marco-de-datos-acotado)  
+- [join, inner join ](#join-inner-join )  
 - [distinct](#distinct)  
  
 
