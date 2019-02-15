@@ -80,7 +80,7 @@ object DataFrameOperations extends App with Context{
   val donutTasteLevel: String = "Tasty"
   println(f"$donutName%20s $donutTasteLevel")
 ```
-```
+```scala
   //crear dataFrame desde una colección
   val seqTags = Seq(
     1 -> "so_java",
