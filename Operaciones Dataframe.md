@@ -1,8 +1,8 @@
 ## Operaciones con DataFrame
 
-[unión dataframe] (#identificador)  
-intersección dataframe
-agragar columnas a dataframe
+[unión dataframe](#identificador)  
+intersección dataframe  
+agragar columnas a dataframe  
 
 ```scala
 package operaciones_dataframe
