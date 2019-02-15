@@ -1,6 +1,6 @@
 ## Operaciones con DataFrame
 
-[unión dataframe](#union-dataframe)  
+[unión dataframe](#unión-dataframe)  
 intersección dataframe  
 agragar columnas a dataframe  
 
