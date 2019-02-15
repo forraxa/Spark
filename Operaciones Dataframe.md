@@ -1,6 +1,6 @@
 ## Operaciones con DataFrame
 
-unión dataframe [id]: id    
+[unión dataframe] (#identificador)  
 intersección dataframe
 agragar columnas a dataframe
 
@@ -92,7 +92,7 @@ object DataFrameOperations extends App with Context{
   val dfMoreTags = seqTags.toDF("id", "tag")
   dfMoreTags.show(15)
 ```
-[id]: id  
+identificador  
 ```scala
   //dataFrame union
   //Para combinar dos dataframe
