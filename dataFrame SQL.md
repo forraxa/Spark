@@ -1,7 +1,16 @@
 ## DataFrame SQL
 
+Indice:  
+- [filter](#filter)  
+- [groupBy](#groupBy)  
+- [conversión de tipos](#conversión de tipos)  
+- [marco de datos acotado](#marco de datos acotado)  
+- [join, inner join ](#join, inner join )  
+- [distinct](#distinct)  
+ 
 
-```
+
+```scala
 package dataframe_sql
 
 object DataFrame_Tutorial extends App with Context {
@@ -17,11 +26,12 @@ object DataFrame_Tutorial extends App with Context {
   dfTags.show(10)
 }
 ```
-```
+```scala
   dfTags.select("id", "tag").show(10)
 ```
-```
-  //filter
+### filter
+```scala
+ 
   dfTags.filter("tag == 'php'").show(10)
   println(s"El numero de tags php es: ${dfTags.filter("tag == 'php'").count()}")
   dfTags.filter("tag like 'so%k%s'").show(10)
@@ -31,13 +41,15 @@ object DataFrame_Tutorial extends App with Context {
     .show(10)
   dfTags.filter("id in (25, 108)").show(10)
 ```
-```  
-  //groupBy
+
+### groupBy
+```scala
+  
   dfTags.groupBy("tag").count().show(10)
   dfTags.groupBy("tag").count().filter("count > 5").show(10)
   dfTags.groupBy("tag").count().filter("count > 5").orderBy("count").show(10)
 ```
-```
+```scala
   // DataFrame Query: Cast columns to specific data type
   val dfQuestionsCSV = sparkSession
     .read
@@ -49,8 +61,10 @@ object DataFrame_Tutorial extends App with Context {
 
   dfQuestionsCSV.printSchema()
 ```
-```
-  //conversión de tipos
+
+### conversión de tipos
+```scala
+  
   val dfQuestions = dfQuestionsCSV.select(
     dfQuestionsCSV.col("id").cast("integer"),
     dfQuestionsCSV.col("creation_date").cast("timestamp"),
@@ -64,12 +78,14 @@ object DataFrame_Tutorial extends App with Context {
   dfQuestions.printSchema()
   dfQuestions.show(10)
 ```
-```
-  //marco de datos acotado
+### marco de datos acotado
+```scala
+  
   val dfQuestionsSubset = dfQuestions.filter("score > 400 and score < 410").toDF()
   dfQuestionsSubset.show()
 ```
-```
+### join, inner join 
+```scala
   //join
   dfQuestionsSubset.join(dfTags, "id").show(10)
 
@@ -84,8 +100,9 @@ object DataFrame_Tutorial extends App with Context {
     .join(dfTags, Seq("id"), "inner")
     .show(10)
 ```
-```
-  //Distinct
+### distinct
+```scala
+  
   dfTags
     .select("tag")
     .distinct()
