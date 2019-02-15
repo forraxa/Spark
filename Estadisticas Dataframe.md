@@ -1,6 +1,6 @@
 ## Estadísticas Dataframe
 
-[average, máximo, mínimo, mean, sum](#average,-máximo,-mínimo,-mean,-sum)
+[average, máximo, mínimo, mean, sum](#average-máximo-mínimo-mean-sum)
 
 ```scala
 package estadisticas_dataframe
