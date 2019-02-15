@@ -8,7 +8,7 @@ Indice:
 - [buscar etiquetas](#buscar-etiquetas)  
 - [clausula where, and, in, group by having](#clausula-where-and-in-group-by-having)  
 - [*prepara dataframe para hacer join](#prepara-dataframe-para-hacer-join)  
-- [inner join](#inner join)  
+- [inner join](#inner-join)  
 - [selección de elementos distintos distinct()](#selección-de-elementos-distintos-distinct)  
 - [función definida por el usuario (UDF)](#función-definida-por-el-usuario-UDF)  
 
