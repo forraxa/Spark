@@ -1,8 +1,8 @@
 ## Operaciones con DataFrame
 
 [unión dataframe](#unión-dataframe)  
-intersección dataframe  
-agragar columnas a dataframe  
+[intersección dataframe](#intersección-dataframe)    
+[agregar columnas a dataframe](#agregar-columnas-a-dataframe)    
 
 ```scala
 package operaciones_dataframe
@@ -92,21 +92,23 @@ object DataFrameOperations extends App with Context{
   val dfMoreTags = seqTags.toDF("id", "tag")
   dfMoreTags.show(15)
 ```
-## unión dataframe 
+### unión dataframe 
 ```scala
-  //dataFrame union
   //Para combinar dos dataframe
   val dfUnionOfTags = dfTags
     .union(dfMoreTags)
     .filter("id in (1,3)")
   dfUnionOfTags.show(10)
-
-  //dataFrame intersección
+```
+### intersección dataframe
+```scala
   val dfIntersectionTags = dfMoreTags
     .intersect(dfUnionOfTags)
     .show(10)
-
-  //agregar columnas a un dataFrame
+```
+### agregar columnas a un dataFrame
+```scala
+  //
   import org.apache.spark.sql.functions._
   val dfSplitColumn = dfMoreTags
     .withColumn("tmp", split($"tag", "_"))
