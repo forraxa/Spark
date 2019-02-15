@@ -1,5 +1,19 @@
 ## Spark SQL
-```
+
+Indice:  
+- [listar tablas declaradas](#listar-tablas-declaradas)  
+- [selección de columnas](#selección-de-columnas)  
+- [filtrar valor](#filtrar-valor)  
+- [contar filas](#contar-filas)  
+- [buscar etiquetas](#buscar-etiquetas)  
+- [clausula where, and, in, group by having](#clausula-where-and-in-group-by-having)  
+- [*prepara dataframe para hacer join](#prepara-dataframe-para-hacer-join)  
+- [inner join](#inner join)  
+- [selección de elementos distintos distinct()](#selección-de-elementos-distintos-distinct)  
+- [función definida por el usuario (UDF)](#función-definida-por-el-usuario-UDF)  
+
+
+```scala
 package spark_sql
 
 object Spark_SQL extends App with Context{
@@ -16,26 +30,30 @@ object Spark_SQL extends App with Context{
   dfTags.createOrReplaceTempView("so_tags")
   }
 ```
-```
+### listar tablas declaradas
+```scala
   //listar las tablas declaradas
   sparkSession.catalog.listTables().show()
 
   //listar las tablas declaradas utilizando SQL
   sparkSession.sql("show tables").show()
 ```
-```
+### selección de columnas
+```scala
   //seleccionar columnas
   sparkSession
     .sql("select id, tag from so_tags limit 10")
     .show()
 ```
-```
+### filtrar valor
+```scala
   //filtrar por un valor
   sparkSession
     .sql("select * from so_tags where tag = 'php'")
     .show()
 ```
-```
+### contar filas
+```scala
   //contar el número de filas
   sparkSession
     .sql(
@@ -44,7 +62,8 @@ object Spark_SQL extends App with Context{
         |from so_tags where tag = 'php'""".stripMargin)
     .show(10)
 ```
-```
+### buscar etiquetas
+```scala
   //buscar por etiqueta que comience por s
   sparkSession
     .sql(
@@ -54,7 +73,8 @@ object Spark_SQL extends App with Context{
         |where tag like 's%'""".stripMargin)
     .show(10)
 ```
-```
+### clausula where, and, in, group by having
+```scala
   //clausula where y and
   sparkSession
     .sql(
@@ -91,7 +111,8 @@ object Spark_SQL extends App with Context{
 
     .show(10)
 ```
-```
+### *prepara dataframe para hacer join
+```scala
   //preparar dataframes para hacer join
   // Typed dataframe, filter and temp table
   val dfQuestionsCSV = sparkSession
@@ -119,7 +140,8 @@ object Spark_SQL extends App with Context{
   // register temp table
   dfQuestionsSubset.createOrReplaceTempView("so_questions")
 ```
-```
+### inner join
+```scala
   //inner join
   //otros joins:left outer join, right outer join
   sparkSession
@@ -131,15 +153,16 @@ object Spark_SQL extends App with Context{
         |on t.id = q.id""".stripMargin)
     .show(10)
 ```
-```
+### selección de elementos distintos distinct()
+```scala
   //distinct
   sparkSession
     .sql("select distinct tag from so_tags")
     .show(10)
 ```
-```
-  //crear función definida por el usuario (UDF)
-  //crear una función y utilizarla dentro del SQL
+### función definida por el usuario (UDF)
+```scala
+    //crear una función y utilizarla dentro del SQL
   def addPrefix(s: String): String = s"so_$s"
 
   sparkSession
