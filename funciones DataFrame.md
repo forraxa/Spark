@@ -1,5 +1,19 @@
 ## Funciones en DataFrames
 
+Indice:  
+- [nombres de columnas en DataFrame](#nombres-de columnas-en-DataFrame)  
+- [Json en DataFrame](#Json-en-DataFrame)  
+- [join de DataFrames](#join-de-DataFrames)  
+- [buscar en columna dataFrame usando array_contains()](#buscar-en-columna-dataFrame-usando-array_contains)  
+- [comprobar que existe una columna en el DataFrame](#comprobar-que-existe-una-columna-en el-DataFrame)  
+- [dividir columna de Dataframe compuesta por array](#dividir-columna-de-Dataframe-compuesta-por-array)  
+- [cambiar el nombre de una columna de un Dataframe](#cambiar-el-nombre-de-una-columna-de-un-Dataframe)  
+- [crear una columna con una constante](#crear-una-columna-con-una-constante)  
+- [nueva columna en DataFrame con UDF](#nueva-columna-en-DataFrame-con-UDF)  
+- [seleccionar de la primera fila una columna concreta](#seleccionar-de-la-primera-fila-una-columna-concreta)  
+- [formato de la columna](#formato-de-la-columna)  
+- [funciones de String en DataFrames](#funciones-de-String-en-DataFrames)  
+- [Eliminar nulos](#Eliminar-nulos)  
 
 
 
@@ -16,8 +30,9 @@ object funcionesDataframe extends App with Context {
 
   df.show()
 ```
+### nombres de columnas en DataFrame
 ```scala
-  //nombres de columnas en DataFrame
+  
   val columnNames: Array[String] = df.columns
   columnNames.foreach(name => println(s"$name"))
 
@@ -26,8 +41,9 @@ object funcionesDataframe extends App with Context {
   println(s"DataFrame column names = ${columnNames2.mkString(", ")}")
   println(s"DataFrame column data types = ${columnDataTypes.mkString(", ")}")
 ```
+### Json en DataFrame
 ```scala
-  //Json en DataFrame
+  
   //leer Json
   import sparkSession.sqlContext.implicits._
   val tagsDF = sparkSession
@@ -50,8 +66,9 @@ object funcionesDataframe extends App with Context {
     $"stackoverflow_tags.tag.frameworks.name" as "frameworks_name"
   ).show()
 ```
+### join de DataFrames
 ```scala
-  //join de DataFrames
+
   val donuts2 = Seq(("111","plain donut", 1.50), ("222", "vanilla donut", 2.0), ("333","glazed donut", 2.50))
 
   val dfDonuts = sparkSession
@@ -68,8 +85,9 @@ object funcionesDataframe extends App with Context {
   val dfDonutsInventory = dfDonuts.join(dfInventory, Seq("Id"), "inner")
   dfDonutsInventory.show()
 ```
+### buscar en columna dataFrame usando array_contains()
 ```scala
-  //buscar en columna dataFrame usando array_contains()
+
   val df3 = df2.select(
     $"stackoverflow_tags.tag.id" as "id",
     $"stackoverflow_tags.tag.author" as "author",
@@ -83,8 +101,9 @@ object funcionesDataframe extends App with Context {
     .where(array_contains($"frameworks_name","Play Framework"))
     .show()
 ```
+### comprobar que existe una columna en el DataFrame
 ```scala
-  //comprobar que existe una columna en el DataFrame
+
   val donuts = Seq(("plain donut", 1.50), ("vanilla donut", 2.0), ("glazed donut", 2.50))
   val df = sparkSession.createDataFrame(donuts).toDF("Donut Name", "Price")
 
@@ -93,8 +112,9 @@ object funcionesDataframe extends App with Context {
   val priceColumnExists = df.columns.contains("Price")
   println(s"Does price column exist = $priceColumnExists")
 ```
+### dividir columna de Dataframe compuesta por array
 ```scala
-  //dividir columna de Dataframe compuesta por array
+
   /*+----------------+----------+
   |            Name|    Prices|
   +----------------+----------+
@@ -116,14 +136,16 @@ object funcionesDataframe extends App with Context {
   |Strawberry Donut|      2.5|       3.5|
   +----------------+---------+----------+*/
 ```
-```
-  //cambiar el nombre de una columna de un Dataframe
+### cambiar el nombre de una columna de un Dataframe
+```scala
+
   //df.withColumnRenamed("existingName", "newName")
   val df2 = df.withColumnRenamed("Donut Name", "Name")
   df2.show()
 ```
+### crear una columna con una constante
 ```scala
-  //crear una columna con una constante
+
   //la función lit crea una columna con una valor literal
   //typedLit es igual que lit pero maneja List, Seq y Map.
   val df2 = df
@@ -131,8 +153,9 @@ object funcionesDataframe extends App with Context {
     .withColumn("Correlation", lit(1))
     .withColumn("Stock Min Max", typedLit(Seq(100, 500)))
 ```
+### nueva columna en DataFrame con UDF
 ```scala
-  //nueva columna en DataFrame con UDF
+
   val donuts = Seq(("plain donut", 1.50), ("vanilla donut", 2.0), ("glazed donut", 2.50))
   val df = spark.createDataFrame(donuts).toDF("Donut Name", "Price")
 
@@ -150,8 +173,9 @@ object funcionesDataframe extends App with Context {
   val df2 = df.withColumn("Stock Min Max", udfStockMinMax($"Donut Name"))
   df2.show()
 ```
+### seleccionar de la primera fila una columna concreta
 ```scala
-  //seleccionar de la primera fila una columna concreta
+
   //toda primera fila
   val firstRow = df.first()
   println(s"First row = $firstRow")
@@ -164,8 +188,9 @@ object funcionesDataframe extends App with Context {
   val firstRowColumnPrice = df.first().getAs[Double]("Price")
   println(s"First row column Price = $firstRowColumnPrice")
 ```
+### formato de la columna
 ```scala
-  //formato de la columna
+
   //formato de Price: usar format_number() para formatear a 2 decimales
   //formato de name: usar format_string() para anteponer "awesome"
   //Name en mayúsculas: usar upper()
@@ -191,8 +216,9 @@ object funcionesDataframe extends App with Context {
     .withColumn("Year", year($"Purchase Date"))
     .show()
 ```
+### funciones de String en DataFrames
 ```scala
-  //funciones de String en DataFrames
+
   //instr() genera el índice de las coincidencias al buscar una cadena
   //length() determina la longitud de una cadena
   //trim() elimina los espacios en blanco a ambos lados del texto
@@ -233,8 +259,9 @@ object funcionesDataframe extends App with Context {
   +-------------+-----+-------------+--------------+------+-------------+-------------+-------------+-------------+---------+------+-------------------+-------------+
 */
 ```
+### Eliminar nulos
 ```scala
-  //Eliminar nulos
+
   //na.drop() elimina los valores nulos
   val dfWithoutNull = dfWithNull.na.drop()
   dfWithoutNull.show()
