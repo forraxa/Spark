@@ -5,7 +5,7 @@ Indice:
 - [Json en DataFrame](#Json-en-DataFrame)  
 - [join de DataFrames](#join-de-DataFrames)  
 - [buscar en columna dataFrame usando array_contains()](#buscar-en-columna-dataFrame-usando-array_contains)  
-- [comprobar que existe una columna en el DataFrame](#comprobar-que-existe-una-columna-en el-DataFrame)  
+- [comprobar que existe una columna en el DataFrame](#comprobar-que-existe-una-columna-en-el-DataFrame)  
 - [dividir columna de Dataframe compuesta por array](#dividir-columna-de-Dataframe-compuesta-por-array)  
 - [cambiar el nombre de una columna de un Dataframe](#cambiar-el-nombre-de-una-columna-de-un-Dataframe)  
 - [crear una columna con una constante](#crear-una-columna-con-una-constante)  
