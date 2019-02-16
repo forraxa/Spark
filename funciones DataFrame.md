@@ -1,7 +1,7 @@
 ## Funciones en DataFrames
 
 Indice:  
-- [nombres de columnas en DataFrame](#nombres-de columnas-en-DataFrame)  
+- [nombres de columnas en DataFrame](#nombres-de-columnas-en-DataFrame)  
 - [Json en DataFrame](#Json-en-DataFrame)  
 - [join de DataFrames](#join-de-DataFrames)  
 - [buscar en columna dataFrame usando array_contains()](#buscar-en-columna-dataFrame-usando-array_contains)  
