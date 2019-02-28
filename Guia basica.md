@@ -27,7 +27,7 @@ trait Context {
 }
 ```
 
-#### Leer datos 
+## Leer datos 
 ```scala
 val =  flightData = spark
   .read
@@ -42,7 +42,7 @@ val =  flightData = spark
 flightData.sort("count").explain()
 ```
 
-#### DataFrame Code
+## DataFrame Code
 ```scala
 val dataFrameCode = flightData
   .groupBy($"Dest_country_name")
@@ -77,7 +77,7 @@ spark.range(2000)
   .count()
 ```
 
-#### Streaming
+## Streaming
 Para trabajar con datos en streaming es recomendable primero crear un schema para evitar inferir los datos continuamente.  
 
 ```scala
