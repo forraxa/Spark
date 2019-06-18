@@ -10,7 +10,7 @@ package com.rcaride.spark
 import org.apache.spark.sql.types.{StructType, StructField, StringType, IntegerType};
 import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.expressions.Window
-import org.apache.spark.sql.functions.lag
+//import org.apache.spark.sql.functions.lag
 import org.apache.spark.sql.functions._
 import org.apache.log4j._
 
@@ -29,9 +29,8 @@ object intervalotiempo {
       
    
   import spark.implicits._
-```  
-  //declarar dataframe
-```scala    
+  
+  //declarar dataframe  
   val data = Seq(
       (1, 0, 3),
       (1, 4, 8),
@@ -43,7 +42,6 @@ object intervalotiempo {
       ).toDF("id", "start", "end")
       
    data.show()
-```
 
 /*
 +---+-----+---+
@@ -59,10 +57,8 @@ object intervalotiempo {
 +---+-----+---+
 */
    
-definimos una ventana ordenada por "start"  
-necesitamos partitionBy para agrupar por id
-
-```scala
+  //definimos una ventana ordenada por "start"  
+  //necesitamos partitionBy para agrupar por id
   val ventana = Window.partitionBy($"id").orderBy("start")
  
   //definimos una nueva columna "prevEnd" con la columna "end" lageada un posición sobre la ventana creada.
@@ -71,9 +67,8 @@ necesitamos partitionBy para agrupar por id
   //unir la columna "prevEnd" con el dataframe "data"
   val withPrevEnd = data.withColumn("prevEnd", prevEnd)
   withPrevEnd.show
-```scala  
-
-/*
+  
+  /*
 +---+-----+---+-------+
 | id|start|end|prevEnd|
 +---+-----+---+-------+
@@ -85,14 +80,13 @@ necesitamos partitionBy para agrupar por id
 |  2|  231|311|   null|
 |  2|  781|790|    311|
 +---+-----+---+-------+
-*/
+   */
   
-para cada fila calcular la diferencia entre el "start" y el "prevEnd" que es la finalización de la anterior 
-```scala
+  //para cada fila calcular la diferencia entre el "start" y el "prevEnd" que es la finalización de la anterior 
   val idleIntervals = withPrevEnd.withColumn("diff", $"start"- $"prevEnd")
   idleIntervals.show
-```scala
-/*
+  
+  /*
 +---+-----+---+-------+----+
 | id|start|end|prevEnd|diff|
 +---+-----+---+-------+----+
@@ -104,13 +98,12 @@ para cada fila calcular la diferencia entre el "start" y el "prevEnd" que es la 
 |  2|  231|311|   null|null|
 |  2|  781|790|    311| 470|
 +---+-----+---+-------+----+
-*/
+   */
   
-calcular el total de ciclos de tiempo que han estado las máquinas.
-```scala
+  //calcular el total de ciclos de tiempo que han estado las máquinas.
   val totalIdleIntervals = idleIntervals.select($"id",$"diff").groupBy($"id").agg(sum("diff"))
   totalIdleIntervals.show()
-```
+  
 /*
 +---+---------+
 | id|sum(diff)|
@@ -118,7 +111,8 @@ calcular el total de ciclos de tiempo que han estado las máquinas.
 |  1|      384|
 |  2|      470|
 +---+---------+  
-*/
+ */
   
   }     
 }
+```scala
