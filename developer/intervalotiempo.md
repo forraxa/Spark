@@ -1,11 +1,11 @@
-// Objetivo:
-// Evaluar cuanto tiempo están inactivas una serie de maquinas
+Objetivo:
+Evaluar cuanto tiempo están inactivas una serie de maquinas
 
-// id: referencia de la máquina
-// start: ciclo o periodo temporal de comienzo
-// end: ciclo o periodo temporal de finalización
+id: referencia de la máquina
+start: ciclo o periodo temporal de comienzo
+end: ciclo o periodo temporal de finalización
 
-
+```scala
 package com.rcaride.spark
 import org.apache.spark.sql.types.{StructType, StructField, StringType, IntegerType};
 import org.apache.spark.sql.{Row, SparkSession}
@@ -29,8 +29,9 @@ object intervalotiempo {
       
    
   import spark.implicits._
-  
-  //declarar dataframe  
+```  
+  //declarar dataframe
+```scala    
   val data = Seq(
       (1, 0, 3),
       (1, 4, 8),
@@ -42,7 +43,7 @@ object intervalotiempo {
       ).toDF("id", "start", "end")
       
    data.show()
-
+```
 /*
 +---+-----+---+
 | id|start|end|
@@ -57,8 +58,9 @@ object intervalotiempo {
 +---+-----+---+
 */
    
-  //definimos una ventana ordenada por "start"  
-  //necesitamos partitionBy para agrupar por id
+definimos una ventana ordenada por "start"  
+necesitamos partitionBy para agrupar por id
+```scala
   val ventana = Window.partitionBy($"id").orderBy("start")
  
   //definimos una nueva columna "prevEnd" con la columna "end" lageada un posición sobre la ventana creada.
@@ -67,7 +69,7 @@ object intervalotiempo {
   //unir la columna "prevEnd" con el dataframe "data"
   val withPrevEnd = data.withColumn("prevEnd", prevEnd)
   withPrevEnd.show
-  
+```scala  
 /*
 +---+-----+---+-------+
 | id|start|end|prevEnd|
@@ -82,10 +84,11 @@ object intervalotiempo {
 +---+-----+---+-------+
 */
   
-  //para cada fila calcular la diferencia entre el "start" y el "prevEnd" que es la finalización de la anterior 
+para cada fila calcular la diferencia entre el "start" y el "prevEnd" que es la finalización de la anterior 
+```scala
   val idleIntervals = withPrevEnd.withColumn("diff", $"start"- $"prevEnd")
   idleIntervals.show
-  
+```scala
 /*
 +---+-----+---+-------+----+
 | id|start|end|prevEnd|diff|
@@ -100,10 +103,11 @@ object intervalotiempo {
 +---+-----+---+-------+----+
 */
   
-  //calcular el total de ciclos de tiempo que han estado las máquinas.
+calcular el total de ciclos de tiempo que han estado las máquinas.
+```scala
   val totalIdleIntervals = idleIntervals.select($"id",$"diff").groupBy($"id").agg(sum("diff"))
   totalIdleIntervals.show()
-  
+```
 /*
 +---+---------+
 | id|sum(diff)|
