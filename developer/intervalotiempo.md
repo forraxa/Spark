@@ -44,6 +44,7 @@ object intervalotiempo {
       
    data.show()
 ```
+
 /*
 +---+-----+---+
 | id|start|end|
@@ -60,6 +61,7 @@ object intervalotiempo {
    
 definimos una ventana ordenada por "start"  
 necesitamos partitionBy para agrupar por id
+
 ```scala
   val ventana = Window.partitionBy($"id").orderBy("start")
  
@@ -70,6 +72,7 @@ necesitamos partitionBy para agrupar por id
   val withPrevEnd = data.withColumn("prevEnd", prevEnd)
   withPrevEnd.show
 ```scala  
+
 /*
 +---+-----+---+-------+
 | id|start|end|prevEnd|
@@ -115,7 +118,7 @@ calcular el total de ciclos de tiempo que han estado las máquinas.
 |  1|      384|
 |  2|      470|
 +---+---------+  
- */
+*/
   
   }     
 }
