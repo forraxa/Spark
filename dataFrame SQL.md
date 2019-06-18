@@ -4,7 +4,7 @@ Indice:
 - [filter](#filter)  
 - [groupBy](#groupBy)  
 - [conversión de tipos](#conversión-de-tipos)  
-- [marco de datos acotado](#marco-de-datos-acotado)  
+- [filtrado](#filtrado)  
 - [join, inner join ](#join-inner-join )  
 - [distinct](#distinct)  
  
@@ -78,7 +78,7 @@ object DataFrame_Tutorial extends App with Context {
   dfQuestions.printSchema()
   dfQuestions.show(10)
 ```
-### marco de datos acotado
+### filtrado
 ```scala
   
   val dfQuestionsSubset = dfQuestions.filter("score > 400 and score < 410").toDF()
