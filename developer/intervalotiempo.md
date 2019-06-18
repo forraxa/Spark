@@ -115,4 +115,4 @@ object intervalotiempo {
   
   }     
 }
-```scala
+```
