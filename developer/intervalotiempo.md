@@ -1,9 +1,9 @@
-Objetivo:
-Evaluar cuanto tiempo están inactivas una serie de maquinas
+Objetivo:  
+Evaluar cuanto tiempo están inactivas una serie de maquinas  
 
-id: referencia de la máquina
-start: ciclo o periodo temporal de comienzo
-end: ciclo o periodo temporal de finalización
+id: referencia de la máquina  
+start: ciclo o periodo temporal de comienzo  
+end: ciclo o periodo temporal de finalización  
 
 ```scala
 package com.rcaride.spark
